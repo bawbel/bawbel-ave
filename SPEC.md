@@ -382,7 +382,7 @@ records/
   AVE-2026-XXXXX.json    ← your record (use XXXXX as placeholder, we assign the ID)
 ```
 
-Or email: **ave-submissions@bawbel.io** with subject line `AVE Submission: [brief title]`
+Or email: **bawbel.io@gmail.com** with subject line `AVE Submission: [brief title]`
 
 ### Step 5 — Review process
 
@@ -469,10 +469,13 @@ All contributors are expected to treat each other with respect. Security researc
 
 | Purpose | Contact |
 |---|---|
-| AVE record submission | ave-submissions@bawbel.io |
-| Urgent / critical disclosure | security@bawbel.io |
-| General questions | hello@bawbel.io |
-| Schema and governance | github.com/bawbel/bawbel-ave/issues |
+| AVE record submission | bawbel.io@gmail.com — subject: `AVE Submission: [title]` |
+| Urgent / critical disclosure | bawbel.io@gmail.com — subject: `AVE CRITICAL: [title]` |
+| General questions | bawbel.io@gmail.com |
+| Schema and governance | [github.com/bawbel/bawbel-ave/issues](https://github.com/bawbel/bawbel-ave/issues) |
+
+> **Note:** Dedicated domain emails (ave-submissions@bawbel.io, security@bawbel.io) are coming soon.
+> Until then, all contact goes through **bawbel.io@gmail.com**.
 
 ---
 
