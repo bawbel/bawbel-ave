@@ -66,7 +66,7 @@ See [SPEC.md Section 5](SPEC.md#5-record-schema) for field definitions and the a
 ### Researcher recognition
 
 Every accepted submission earns:
-- 💰 **Cash bounty** — $100–$500 USD (severity-dependent)
+- 💰 **Cash bounty** — $10 USD per accepted record (paid via PayPal)
 - 📛 **Permanent credit** — your name on the published record forever
 - 🎁 **Bawbel Pro** — free account for the lifetime of the product
 - 📢 **Featured spotlight** — monthly researcher highlight in the Bawbel threat report

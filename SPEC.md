@@ -397,7 +397,7 @@ Or email: **bawbel.io@gmail.com** with subject line `AVE Submission: [brief titl
 
 Every accepted AVE record permanently credits the discovering researcher by name. Records submitted through the official portal are eligible for:
 
-- **Cash bounty**: $100–$500 USD per accepted record (severity-dependent)
+- **Cash bounty**: $10 USD per accepted record (paid via PayPal — bounty program expands as the project grows)
 - **Permanent attribution**: your name on the published record
 - **Bawbel Pro account**: free for the lifetime of the product
 - **Featured researcher**: monthly spotlight in the Bawbel threat report

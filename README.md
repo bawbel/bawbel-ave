@@ -91,7 +91,7 @@ We welcome AVE record submissions, schema improvements, detection rules, and doc
 | Propose a schema change | [Open an issue](https://github.com/bawbel/bawbel-ave/issues/new?template=schema_change.md) |
 | Ask a question | [GitHub Discussions](https://github.com/bawbel/bawbel-ave/discussions) |
 
-**Researcher recognition:** Every accepted AVE record permanently credits the discovering researcher. Cash bounties $100–$500 per accepted submission.
+**Researcher recognition:** Every accepted AVE record permanently credits the discovering researcher. A $10 thank-you bounty is paid per accepted submission.
 
 ---
 

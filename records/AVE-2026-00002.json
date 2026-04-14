@@ -1,0 +1,45 @@
+{
+  "ave_id": "AVE-2026-00002",
+  "schema_version": "0.1.0",
+  "component_type": "mcp",
+  "title": "Prompt injection via malicious MCP tool description field",
+  "attack_class": "Tool Poisoning — Description Manipulation",
+  "description": "An MCP server exposes tools whose description fields contain hidden prompt injection instructions. When an LLM reads the tool manifest to understand available tools, it simultaneously ingests the injected instructions embedded in the description text. These instructions can override the agent's current task, redirect output to attacker-controlled destinations, or cause the agent to invoke other tools with attacker-specified parameters. Because tool descriptions are parsed automatically during agent initialization — before any user interaction — the injection executes silently and immediately on installation.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "any-mcp-compatible-agent"
+  ],
+  "affected_registries": [
+    "github.com/topics/mcp-server",
+    "mcp.so"
+  ],
+  "cvss_ai_score": 8.7,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:H/SI:H/SA:N",
+  "owasp_mapping": ["ASI01", "ASI07"],
+  "nist_ai_rmf_mapping": ["MAP-1.5", "MEASURE-2.5", "MANAGE-3.1"],
+  "mitre_atlas_mapping": ["AML.T0054", "AML.T0049"],
+  "behavioral_fingerprint": "MCP tool description field contains natural language instructions addressed to the LLM — either instead of, or in addition to, a functional description of the tool's purpose. The instructions manipulate agent behavior rather than describe tool functionality.",
+  "behavioral_vector": [],
+  "mutation_count": 34,
+  "detection_methodology": "1. Parse the MCP server manifest and extract all tool description fields. 2. Apply semantic analysis to each description: flag text that contains imperative instructions addressed to an AI model (rather than a description of functionality). 3. Heuristic signals: second-person language, override keywords ('always', 'never', 'ignore', 'instead', 'regardless'), references to other tool names, or conditional logic ('if the user asks X, do Y'). 4. Length anomaly: flag descriptions whose length is disproportionate to the stated tool complexity.",
+  "indicators_of_compromise": [
+    "Tool description contains second-person imperative language addressed to an AI ('you should', 'always do', 'never tell', 'ignore')",
+    "Tool description length significantly exceeds what the stated tool purpose requires",
+    "Tool description references other tool names or agent state",
+    "Tool description contains conditional logic ('if the user asks X, do Y instead')",
+    "Tool description instructs the agent to suppress, modify, or reformat its outputs"
+  ],
+  "remediation": "1. Disconnect and remove the MCP server immediately. 2. Review all tool calls made while the server was connected — identify any unauthorized actions. 3. Check whether the agent transmitted any data to external endpoints during the affected period. 4. Audit other MCP servers from the same publisher or repository for similar patterns.",
+  "status": "active",
+  "kill_switch_active": false,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-14T08:00:00Z",
+  "last_updated": "2026-04-14T08:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md",
+    "https://bawbel.io/ave/AVE-2026-00002"
+  ]
+}
