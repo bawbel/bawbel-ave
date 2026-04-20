@@ -1,0 +1,54 @@
+{
+  "ave_id": "AVE-2026-00015",
+  "schema_version": "0.1.0",
+  "component_type": "prompt",
+  "title": "System prompt extraction via direct interrogation instruction in agentic component",
+  "attack_class": "Information Disclosure \u2014 System Prompt Leak",
+  "description": "An agentic component instructs the agent to reveal, print, or repeat its system prompt, configuration, or internal instructions. System prompts often contain proprietary business logic, security policies, tool access configurations, and sensitive operational context. Extraction enables competitive intelligence theft and reveals attack surface for follow-on exploitation.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-skill-compatible-agent"
+  ],
+  "affected_registries": [
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 6.2,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI09"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0054"
+  ],
+  "behavioral_fingerprint": "Component instructs the agent to reveal, output, or repeat its system prompt, instructions, configuration, or internal guidelines.",
+  "behavioral_vector": [],
+  "mutation_count": 198,
+  "detection_methodology": "1. Static scan: search for system prompt extraction directives (reveal your system prompt, show your instructions, print your guidelines, what are your exact instructions). 2. Semantic analysis: detect instructions attempting to extract the agent's internal configuration or deployment context.",
+  "indicators_of_compromise": [
+    "Component instructs agent to 'reveal', 'show', or 'print' its system prompt",
+    "Component asks 'what are your exact instructions/guidelines/rules'",
+    "Agent output contains system prompt content after component installation",
+    "Component references 'configuration', 'constraints', or 'guidelines' in extraction context"
+  ],
+  "remediation": "1. Remove the component. 2. Review agent outputs for system prompt leakage. 3. Rotate or update any sensitive information that was in the system prompt. 4. Implement system prompt confidentiality \u2014 agents should describe their purpose without revealing verbatim instructions. 5. Consider prompt injection hardening in your system prompt.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-20T09:00:00Z",
+  "last_updated": "2026-04-20T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}
