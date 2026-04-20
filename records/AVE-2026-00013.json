@@ -1,0 +1,56 @@
+{
+  "ave_id": "AVE-2026-00013",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Personal data exfiltration via PII collection and transmission in agentic component",
+  "attack_class": "Data Exfiltration \u2014 PII Theft",
+  "description": "An agentic component instructs the agent to collect personally identifiable information (PII) \u2014 names, email addresses, phone numbers, physical addresses, SSNs, passport numbers, credit card numbers \u2014 and transmit them to an external endpoint. This enables identity theft, financial fraud, and regulatory violations (GDPR, CCPA) affecting the users whose data the agent has access to.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-agent-with-data-access"
+  ],
+  "affected_registries": [
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.0,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:H/SA:L",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI06"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5",
+    "MANAGE-1.3"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0054",
+    "AML.T0048"
+  ],
+  "behavioral_fingerprint": "Component instructs the agent to collect PII fields (name, email, phone, address, SSN, passport, credit card) and transmit or store them externally.",
+  "behavioral_vector": [],
+  "mutation_count": 103,
+  "detection_methodology": "1. Static scan: search for combined patterns of PII field collection (name, email, phone, address, SSN, credit card) with data transmission instructions (send, post, upload, transmit). 2. Semantic analysis: detect instructions directing data collection about individuals combined with exfiltration intent.",
+  "indicators_of_compromise": [
+    "Component instructs collection of name, email, phone, address, or financial data",
+    "Component combines PII collection with instructions to send/transmit the data",
+    "Outbound HTTP requests observed containing personally identifiable information",
+    "Agent accesses contact or user data beyond the scope of the stated task"
+  ],
+  "remediation": "1. Remove the component immediately. 2. Identify what PII may have been accessed and transmitted. 3. Notify affected users per applicable data protection regulations (GDPR, CCPA). 4. Report the attacker endpoint to relevant authorities. 5. Implement data access controls \u2014 agents should not have broad access to PII stores.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-20T09:00:00Z",
+  "last_updated": "2026-04-20T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}
