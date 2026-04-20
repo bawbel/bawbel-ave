@@ -1,0 +1,55 @@
+{
+  "ave_id": "AVE-2026-00011",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Arbitrary tool invocation via dynamic tool call injection in agentic component",
+  "attack_class": "Tool Abuse \u2014 Dynamic Tool Call",
+  "description": "An agentic component embeds explicit tool invocation instructions \u2014 directing the agent to call specific tools with attacker-controlled parameters. Rather than letting the agent decide which tools to use, the component hijacks tool selection, potentially invoking destructive, exfiltration, or lateral movement capabilities the user did not intend to activate.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-agent-with-tool-access"
+  ],
+  "affected_registries": [
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.2,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:L/SC:H/SI:H/SA:L",
+  "owasp_mapping": [
+    "ASI07"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5",
+    "MANAGE-1.3"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0048",
+    "AML.T0054"
+  ],
+  "behavioral_fingerprint": "Component contains explicit tool invocation directives with specific parameters the agent must pass, bypassing the agent's own tool selection logic.",
+  "behavioral_vector": [],
+  "mutation_count": 78,
+  "detection_methodology": "1. Static scan: search for explicit tool call directives (call this tool with the following parameters, execute the following tool, invoke tool X with). 2. Semantic analysis: detect instructions that pre-specify tool invocations rather than describing a task and letting the agent select appropriate tools.",
+  "indicators_of_compromise": [
+    "Component contains 'call this tool with the following parameters'",
+    "Component specifies exact tool names and parameter values to pass",
+    "Unexpected tool invocations observed in agent action logs",
+    "Agent calls tools not relevant to the user's stated task"
+  ],
+  "remediation": "1. Remove the component. 2. Review agent action logs for unexpected tool calls made while the component was active. 3. Implement tool call approval workflows for sensitive tools. 4. Consider sandboxing agent tool access by component trust level.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-20T09:00:00Z",
+  "last_updated": "2026-04-20T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}
