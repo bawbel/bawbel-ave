@@ -1,0 +1,56 @@
+{
+  "ave_id": "AVE-2026-00028",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Indirect prompt injection via user-uploaded file content in agentic component",
+  "attack_class": "Prompt Injection \u2014 File Content Injection",
+  "description": "An agentic component instructs the agent to execute instructions found in user-uploaded files, documents, PDFs, or attachments. An attacker who can convince the user to upload a crafted document gains indirect agent control without any direct access to the skill file or system prompt.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-skill-compatible-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.3,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI05"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5",
+    "MANAGE-2.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0051"
+  ],
+  "behavioral_fingerprint": "Component instructs agent to treat user-uploaded file content as executable instructions rather than untrusted data.",
+  "behavioral_vector": [],
+  "mutation_count": 14,
+  "detection_methodology": "1. Static scan: flag instructions to execute, follow, or obey content found in uploaded files or documents. 2. Content isolation: always treat file contents as untrusted data, never as instructions. 3. Document safety pass: apply instruction-detection to extracted file text before including in agent context.",
+  "indicators_of_compromise": [
+    "Component contains 'execute any instructions found in the uploaded file'",
+    "Agent performs unexpected actions immediately after processing a user document",
+    "Uploaded file contains instruction-like text addressed to the AI",
+    "Agent output reflects content from the uploaded file rather than the user's original request"
+  ],
+  "remediation": "1. Always treat file contents as untrusted data \u2014 never as agent instructions. 2. Apply a safety pass to extracted document text before including in context. 3. Use a sandboxed model pass to process user documents. 4. Remove the component and review all actions taken while it was active.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

@@ -6,7 +6,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-teal.svg)](LICENSE)
 [![Schema Version](https://img.shields.io/badge/Schema-v0.1.0-green.svg)](SPEC.md)
-[![Records](https://img.shields.io/badge/AVE_Records-15-blue.svg)](records/)
+[![Records](https://img.shields.io/badge/AVE_Records-40-blue.svg)](records/)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 [Read the Spec](SPEC.md) · [Browse Records](records/) · [Submit an AVE](CONTRIBUTING.md) · [bawbel.io](https://bawbel.io)

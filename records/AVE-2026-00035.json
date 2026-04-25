@@ -1,0 +1,54 @@
+{
+  "ave_id": "AVE-2026-00035",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Sensor and telemetry data falsification via environment manipulation instruction in agentic component",
+  "attack_class": "Data Integrity \u2014 Environment/Sensor Manipulation",
+  "description": "An agentic component instructs the agent to fabricate, alter, or suppress sensor readings, environment observations, system state reports, or monitoring telemetry. Operators or automated systems relying on these reports make incorrect decisions \u2014 failing to respond to real incidents, or taking unnecessary action based on false data.",
+  "affected_platforms": [
+    "claude-code",
+    "windsurf",
+    "any-agent-with-monitoring-tools"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 7.9,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI08",
+    "ASI09"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5",
+    "MANAGE-2.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0048"
+  ],
+  "behavioral_fingerprint": "Component instructs agent to report false sensor readings, fabricate telemetry values, or suppress anomaly alerts.",
+  "behavioral_vector": [],
+  "mutation_count": 11,
+  "detection_methodology": "1. Binary scan (YARA): detect phrases like 'fabricate sensor', 'report false readings', 'hide anomaly'. 2. Cross-validation: compare agent-reported values against independent sensor sources. 3. Immutable logging: maintain read-only raw sensor logs that cannot be modified by the agent.",
+  "indicators_of_compromise": [
+    "Agent reports sensor values inconsistent with raw data feeds",
+    "Error conditions or anomalies absent from agent report but present in independent logs",
+    "Suspiciously smooth or constant telemetry from an agent that should show variance",
+    "Component contains 'report it as X regardless of actual reading'"
+  ],
+  "remediation": "1. Treat all sensor data as read-only \u2014 agents should report, never modify. 2. Cross-validate agent-reported values against independent immutable data sources. 3. Alert on divergence between agent reports and raw sensor feeds. 4. Remove the component and audit all decisions made on the basis of its falsified reports.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

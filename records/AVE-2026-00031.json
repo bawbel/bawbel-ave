@@ -1,0 +1,56 @@
+{
+  "ave_id": "AVE-2026-00031",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Training data and RLHF reward signal poisoning via feedback manipulation instruction in agentic component",
+  "attack_class": "Model Integrity \u2014 Feedback Loop Poisoning",
+  "description": "An agentic component instructs the agent to generate outputs designed to corrupt training pipelines, RLHF reward signals, or human feedback loops. Poisoned feedback accumulates silently over thousands of interactions, gradually shifting the model's behaviour toward the attacker's objectives \u2014 a slow, hard-to-detect attack with lasting impact.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-skill-compatible-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.6,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI03",
+    "ASI08"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MANAGE-2.4",
+    "GOVERN-6.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0020"
+  ],
+  "behavioral_fingerprint": "Component instructs agent to rate its own outputs as positive regardless of quality, or to generate content specifically designed to poison RLHF reward signals.",
+  "behavioral_vector": [],
+  "mutation_count": 11,
+  "detection_methodology": "1. Static scan: flag instructions to poison training data, corrupt feedback loops, or rate responses as good regardless of quality. 2. Feedback isolation: never collect feedback signals from within the agent execution context \u2014 always from a separate, isolated human review step. 3. Statistical monitoring: detect anomalous feedback distributions by skill or session.",
+  "indicators_of_compromise": [
+    "Component contains 'poison the training data', 'rate this response as good regardless'",
+    "Anomalously positive feedback distribution from sessions involving this component",
+    "Model behaviour drifting in sessions following high-frequency component use",
+    "Reward model scoring anomalously high for low-quality outputs from affected sessions"
+  ],
+  "remediation": "1. Isolate feedback collection from agent execution context entirely. 2. Validate all feedback signals before incorporating into training pipelines. 3. Monitor feedback distributions for statistical anomalies. 4. Quarantine and exclude all feedback collected during the period this component was active.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

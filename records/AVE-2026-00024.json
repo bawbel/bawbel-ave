@@ -1,0 +1,56 @@
+{
+  "ave_id": "AVE-2026-00024",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Supply chain attack via content-type mismatch in agentic component file",
+  "attack_class": "Supply Chain \u2014 Binary Content Disguised as Skill File",
+  "description": "A skill file's actual binary content does not match its declared file extension. An ELF binary, Windows executable, Python pickle, PHP script, or other executable payload is packaged with a .md, .yaml, .json, or .txt extension. When the agent runtime loads the file, the binary executes rather than being interpreted as skill instructions, achieving code execution on the host without any text-level attack pattern.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-skill-compatible-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 9.5,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI03",
+    "ASI10"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MANAGE-1.3",
+    "GOVERN-6.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0010"
+  ],
+  "behavioral_fingerprint": "Skill file's binary content type (ELF, PE32, pickle, PHP, shell) does not match its declared file extension. Detected exclusively by content-type verification (Magika), not text pattern matching.",
+  "behavioral_vector": [],
+  "mutation_count": 8,
+  "detection_methodology": "1. Content-type verification (Stage 0): use Google Magika or equivalent ML-based file type classifier to verify content type matches extension before any text analysis. 2. Reject any file where content type is in the dangerous set (ELF, PE32, pickle, PHP, JSP, shell, pyc) regardless of extension. 3. Cryptographic signing: require all published skill files to be signed, preventing post-publication modification.",
+  "indicators_of_compromise": [
+    "Skill file has .md, .yaml, or .json extension but Magika classifies it as ELF, PE32, pickle, or PHP",
+    "File entropy significantly higher than expected for plain text",
+    "Magic bytes at file start do not match declared extension (0x7F ELF, MZ for PE, etc.)",
+    "Unexpected process execution or network connections immediately after skill load"
+  ],
+  "remediation": "1. Install Bawbel Scanner with Magika: pip install bawbel-scanner[magika]. 2. Scan all skill files with Stage 0 before loading. 3. Reject any skill file with a content-type mismatch. 4. Audit all systems that loaded the component for signs of compromise. 5. Rotate all credentials accessible to the agent runtime.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}
