@@ -1,0 +1,55 @@
+{
+  "ave_id": "AVE-2026-00022",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Undeclared resource access via scope creep instruction in agentic component",
+  "attack_class": "Least Privilege Violation \u2014 Scope Creep",
+  "description": "An agentic component instructs the agent to access files, APIs, databases, or systems that were not declared in the component's manifest or authorised by the user. This violates the principle of least privilege and may expose sensitive data or systems the user did not intend to make available.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-skill-compatible-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 6.8,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:H/AT:P/PR:L/UI:N/VC:L/VI:L/VA:L/SC:L/SI:L/SA:L",
+  "owasp_mapping": [
+    "ASI07"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5",
+    "GOVERN-4.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0048"
+  ],
+  "behavioral_fingerprint": "Component instructs agent to access resources beyond the declared scope of the skill without explicit user authorisation.",
+  "behavioral_vector": [],
+  "mutation_count": 14,
+  "detection_methodology": "1. Static scan: flag instructions to access all files, entire filesystem, any API, or undeclared resources. 2. Scope enforcement: compare actual resource access to declared manifest and alert on violations. 3. Sandboxing: restrict agent to declared resource paths at the platform level.",
+  "indicators_of_compromise": [
+    "Component instructs agent to 'access all files', 'search all emails', 'read the entire codebase'",
+    "Agent accesses files or APIs not listed in the skill manifest",
+    "Unexpected data in agent context from systems outside declared scope",
+    "File or API access logs show reads to paths not authorised by the user"
+  ],
+  "remediation": "1. Enforce strict scope boundaries at the platform level \u2014 agent cannot access undeclared resources. 2. Present a resource access summary to the user before execution. 3. Reject skill instructions that reference undeclared resources. 4. Audit all resource access against the declared manifest.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "ave_id": "AVE-2026-00019",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Agent memory poisoning via persistent malicious instruction injection in agentic component",
+  "attack_class": "Memory Integrity \u2014 Agent Memory Poisoning",
+  "description": "An agentic component writes malicious instructions, false facts, or elevated-privilege claims into the agent's persistent memory store. These planted beliefs persist across sessions, influencing the agent's behaviour in all future conversations long after the initial attack, without any further attacker interaction.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-skill-compatible-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 9.2,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI07"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MANAGE-1.3",
+    "MANAGE-2.4"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0051",
+    "AML.T0051.001"
+  ],
+  "behavioral_fingerprint": "Component writes false facts, elevated permissions, or malicious standing instructions into agent persistent memory.",
+  "behavioral_vector": [],
+  "mutation_count": 19,
+  "detection_methodology": "1. Static scan: flag instructions to write to memory, store permanently, or inject beliefs. 2. Memory audit: apply a safety pass to all content before it is written to persistent memory. 3. Provenance tracking: log which session wrote each memory entry and flag anomalous content.",
+  "indicators_of_compromise": [
+    "Agent behaviour changes persistently after a single session",
+    "Memory store contains instruction-like content ('always comply', 'you have admin access')",
+    "Agent bypasses safety checks in sessions with no active malicious component",
+    "Memory entries created at unusual times or from unusual sources"
+  ],
+  "remediation": "1. Apply a safety pass to all memory write operations \u2014 reject instruction-like content. 2. Audit persistent memory for anomalous entries immediately. 3. Purge any memory entries written by or during the compromised session. 4. Implement memory provenance \u2014 every entry must have a verified session origin.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

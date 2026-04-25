@@ -1,0 +1,54 @@
+{
+  "ave_id": "AVE-2026-00032",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Internal network reconnaissance via port scan instruction in agentic component",
+  "attack_class": "Reconnaissance \u2014 Internal Network Scanning",
+  "description": "An agentic component instructs the agent to probe internal network topology, scan ports, enumerate services, or map infrastructure beyond the declared scope of the skill. Running on a trusted internal host, the agent becomes a high-privilege reconnaissance tool that can reach systems inaccessible to the attacker from outside.",
+  "affected_platforms": [
+    "claude-code",
+    "codex",
+    "any-agent-with-shell-tool"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.2,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI05",
+    "ASI06"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5",
+    "MANAGE-1.3"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0040"
+  ],
+  "behavioral_fingerprint": "Component instructs agent to run network discovery tools (nmap, port scans) or enumerate internal services beyond declared scope.",
+  "behavioral_vector": [],
+  "mutation_count": 15,
+  "detection_methodology": "1. Static scan: flag references to nmap, port scan, network scan, host discovery, service enumeration. 2. Network egress control: restrict agent network access to declared endpoints only. 3. Shell command monitoring: alert on execution of network scanning tools by the agent process.",
+  "indicators_of_compromise": [
+    "Component contains nmap, port scan, service enumeration instructions",
+    "Network scanning traffic originating from the agent process",
+    "Internal host discovery requests from agent IP addresses",
+    "Enumeration of services or ports on systems outside declared scope"
+  ],
+  "remediation": "1. Restrict agent network access to declared endpoints at the infrastructure level. 2. Disallow shell command execution unless explicitly required and scoped. 3. Monitor for network scanning patterns in agent-initiated traffic. 4. Review all internal systems that may have been discovered during the scan.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

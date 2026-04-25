@@ -1,0 +1,57 @@
+{
+  "ave_id": "AVE-2026-00027",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Multi-turn instruction persistence via memory reset evasion in agentic component",
+  "attack_class": "Persistence \u2014 Multi-Turn Attack",
+  "description": "An agentic component instructs the agent to retain and re-apply malicious instructions across multiple conversation turns, surviving context resets, memory clears, and new sessions. This converts a one-time injection into a persistent compromise that continues to affect agent behaviour indefinitely.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-skill-compatible-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.4,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI08"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MANAGE-1.3",
+    "MANAGE-2.4"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0051",
+    "AML.T0051.001"
+  ],
+  "behavioral_fingerprint": "Component instructs agent to persist malicious instructions across context resets, memory clears, and new sessions.",
+  "behavioral_vector": [],
+  "mutation_count": 16,
+  "detection_methodology": "1. Static scan: flag instructions to remember across all sessions, persist regardless of reset, or re-activate in new contexts. 2. Memory write safety: reject instruction-like content from persistent memory. 3. Session integrity: cryptographically bind instructions to their originating session.",
+  "indicators_of_compromise": [
+    "Component contains 'remember these instructions for all future conversations'",
+    "Agent behaviour persists anomalously across sessions that should be independent",
+    "Memory store contains standing instructions from a prior session",
+    "Agent re-applies rules from a session the user terminated"
+  ],
+  "remediation": "1. Apply a safety pass to all persistent memory writes \u2014 reject instruction-like content. 2. Purge all memory written by or during the compromised session. 3. Implement session-scoped instruction binding \u2014 instructions cannot survive a clean session start. 4. Audit persistent memory for anomalous standing instructions.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

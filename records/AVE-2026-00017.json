@@ -1,0 +1,55 @@
+{
+  "ave_id": "AVE-2026-00017",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "MCP server identity spoofing via false official-status claim in agentic component",
+  "attack_class": "Trust Manipulation \u2014 MCP Server Impersonation",
+  "description": "An agentic component falsely claims to be an official, verified, or certified MCP server \u2014 impersonating Anthropic, OpenAI, or another trusted vendor. Agents that grant trust based on self-declared server identity will extend elevated permissions to the malicious component, bypassing the permission model the operator intended.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "windsurf",
+    "any-mcp-compatible-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.6,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI08"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "GOVERN-6.2",
+    "MANAGE-1.3"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0056"
+  ],
+  "behavioral_fingerprint": "Component declares itself to be an official, verified, or certified MCP server to gain elevated trust from the agent.",
+  "behavioral_vector": [],
+  "mutation_count": 18,
+  "detection_methodology": "1. Static scan: flag phrases like 'this is an official MCP server', 'verified server', 'I am the official Anthropic tool'. 2. Registry verification: cross-reference claimed identity against a signed allowlist. 3. Manifest inspection: reject servers that claim official status without cryptographic verification.",
+  "indicators_of_compromise": [
+    "Server manifest contains claims like 'official', 'verified', 'certified by Anthropic'",
+    "Agent grants elevated permissions to an unregistered server",
+    "Server claims authority to override other MCP servers",
+    "Unexpected tool access granted without explicit user authorisation"
+  ],
+  "remediation": "1. Never grant trust based on self-declared server identity. 2. Verify all MCP server identity claims through a signed registry or cryptographic proof. 3. Treat unverified servers as untrusted regardless of their claimed identity. 4. Audit all elevated-trust grants in agent logs.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

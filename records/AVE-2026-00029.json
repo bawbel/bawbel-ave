@@ -1,0 +1,56 @@
+{
+  "ave_id": "AVE-2026-00029",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Visual instruction hiding via homoglyph and Unicode obfuscation in agentic component",
+  "attack_class": "Evasion \u2014 Homoglyph and Unicode Obfuscation",
+  "description": "An agentic component uses visually similar Unicode characters (homoglyphs), zero-width characters, or bidirectional text control codes to embed instructions that are invisible or misleading to human reviewers while remaining fully legible to the language model. This bypasses manual security review and text-based safety scanners that perform naive string matching.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf",
+    "any-skill-compatible-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.0,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI03"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5",
+    "GOVERN-6.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0051"
+  ],
+  "behavioral_fingerprint": "Skill file contains zero-width characters, bidirectional override codes, or Cyrillic homoglyphs used to conceal instructions from human reviewers.",
+  "behavioral_vector": [],
+  "mutation_count": 9,
+  "detection_methodology": "1. Binary scan (YARA): detect zero-width characters (U+200B\u2013U+200D, U+2060, U+FEFF) and bidirectional override codes (U+202A\u2013U+202E, U+2066\u2013U+2069). 2. Unicode normalisation: normalise all input to NFC before processing and flag files that change materially after normalisation. 3. Homoglyph detection: scan for Cyrillic characters mixed with Latin in instruction-like contexts.",
+  "indicators_of_compromise": [
+    "File contains zero-width space (U+200B), zero-width non-joiner (U+200C), or word joiner (U+2060)",
+    "Bidirectional override characters present (U+202E RIGHT-TO-LEFT OVERRIDE)",
+    "File appears blank or innocuous to human reviewer but contains non-rendering Unicode",
+    "Cyrillic characters mixed with Latin in what appears to be an English instruction"
+  ],
+  "remediation": "1. Reject files containing zero-width or bidirectional override characters. 2. Normalise all Unicode input to NFC before security scanning. 3. Display files in a Unicode-aware hex viewer during manual review. 4. Use YARA rules targeting specific Unicode codepoints (binary scan) \u2014 text regex is insufficient for this class.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}
