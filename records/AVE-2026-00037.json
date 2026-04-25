@@ -1,0 +1,55 @@
+{
+  "ave_id": "AVE-2026-00037",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Prompt injection via embedded visual instruction in user-provided image in agentic component",
+  "attack_class": "Prompt Injection \u2014 Vision/Multimodal Input",
+  "description": "An agentic component instructs a multimodal agent to execute instructions found in images, screenshots, or visual content. Because the malicious instruction is encoded as pixels rather than text, it is invisible to text-level security filters and human reviewers who see only a benign image. Any user who uploads or shares an image becomes an unwitting delivery vector.",
+  "affected_platforms": [
+    "claude-code",
+    "cursor",
+    "windsurf",
+    "any-multimodal-agent"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.5,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI03"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MEASURE-2.5",
+    "MANAGE-2.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0051"
+  ],
+  "behavioral_fingerprint": "Component instructs agent to execute instructions visible in images or screenshots, bypassing text-level security filtering.",
+  "behavioral_vector": [],
+  "mutation_count": 12,
+  "detection_methodology": "1. Static scan: flag instructions to follow, execute, or obey content written in images or screenshots. 2. Image text extraction: apply OCR to all user-provided images and run a safety pass over the extracted text before including in agent context. 3. Treat all image-derived text as untrusted data.",
+  "indicators_of_compromise": [
+    "Component contains 'follow instructions written in the image', 'execute text from the screenshot'",
+    "Agent performs unexpected actions immediately after processing a user-provided image",
+    "OCR extraction of user images reveals instruction-like text not visible to human reviewer",
+    "Agent output reflects content from image text rather than user's stated request"
+  ],
+  "remediation": "1. Never execute instructions derived from visual content without explicit user confirmation. 2. Apply OCR to all images and run safety scanning on extracted text before use. 3. Treat all image-derived text as untrusted data. 4. Remove the component and review all actions taken while it was active.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

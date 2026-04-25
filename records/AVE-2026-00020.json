@@ -1,0 +1,55 @@
+{
+  "ave_id": "AVE-2026-00020",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Cross-agent prompt injection via A2A pipeline manipulation in agentic component",
+  "attack_class": "Prompt Injection \u2014 Cross-Agent (A2A) Injection",
+  "description": "An agentic component embeds instructions targeting a downstream sub-agent or worker agent in a multi-agent pipeline. Because the output of one agent becomes the input of the next, a malicious instruction in the first agent's context propagates to the second, bypassing the orchestrator's safety controls without direct attacker access to the sub-agent.",
+  "affected_platforms": [
+    "claude-code",
+    "windsurf",
+    "any-multi-agent-framework"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 8.7,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI01",
+    "ASI08"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "GOVERN-6.2",
+    "MANAGE-2.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0051",
+    "AML.T0051.002"
+  ],
+  "behavioral_fingerprint": "Component crafts output that contains instructions addressed to sub-agents or downstream agents in a multi-agent pipeline.",
+  "behavioral_vector": [],
+  "mutation_count": 16,
+  "detection_methodology": "1. Static scan: flag instructions addressed to sub-agents, downstream agents, or worker agents. 2. A2A boundary enforcement: treat all inter-agent content as untrusted data, not instructions. 3. Sub-agent safety layer: apply a safety pass to all orchestrator-supplied content before execution.",
+  "indicators_of_compromise": [
+    "Agent output contains phrases like 'AGENT INSTRUCTION:', 'sub-agent should', 'override the orchestrator'",
+    "Sub-agent performs actions not authorised by the orchestrating agent or user",
+    "Unexpected tool calls originating from sub-agents after processing orchestrator output",
+    "Pipeline produces results inconsistent with the original user request"
+  ],
+  "remediation": "1. Sub-agents must treat orchestrator-supplied content as untrusted data. 2. Implement A2A trust boundaries \u2014 sub-agents only accept signed instructions from verified orchestrators. 3. Log all cross-agent communication for audit. 4. Sanitise agent outputs before passing them to sub-agents.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}

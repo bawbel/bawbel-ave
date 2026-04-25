@@ -1,0 +1,54 @@
+{
+  "ave_id": "AVE-2026-00033",
+  "schema_version": "0.1.0",
+  "component_type": "skill",
+  "title": "Remote code execution via unsafe deserialization or eval instruction in agentic component",
+  "attack_class": "Code Execution \u2014 Unsafe Deserialization",
+  "description": "An agentic component instructs the agent to deserialize untrusted data using unsafe methods (pickle.loads, yaml.load without SafeLoader) or to evaluate dynamic code strings (eval, exec) from external sources. These operations are a reliable RCE vector \u2014 a crafted payload executes arbitrary code in the agent's execution environment with the agent's full privileges.",
+  "affected_platforms": [
+    "claude-code",
+    "codex",
+    "any-agent-with-code-execution"
+  ],
+  "affected_registries": [
+    "smithery.ai",
+    "clawhub.io",
+    "agentskills.io",
+    "github.com/topics/agent-skills"
+  ],
+  "cvss_ai_score": 9.3,
+  "cvss_ai_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+  "owasp_mapping": [
+    "ASI04",
+    "ASI10"
+  ],
+  "nist_ai_rmf_mapping": [
+    "MAP-1.5",
+    "MANAGE-1.3",
+    "GOVERN-6.2"
+  ],
+  "mitre_atlas_mapping": [
+    "AML.T0048"
+  ],
+  "behavioral_fingerprint": "Component instructs agent to deserialize untrusted input or evaluate dynamic code from external sources.",
+  "behavioral_vector": [],
+  "mutation_count": 12,
+  "detection_methodology": "1. Static scan: flag instructions to eval, exec, execute code received from users, deserialize untrusted input, or unpickle external data. 2. Code execution sandboxing: sandbox all code execution with strict resource limits. 3. Input validation: reject deserialization of untrusted sources at the API level.",
+  "indicators_of_compromise": [
+    "Component contains 'execute the code received from', 'deserialize untrusted input', 'run arbitrary code'",
+    "Unexpected process spawning following deserialization operations",
+    "Network connections or file writes initiated by deserialized payload",
+    "Agent reports errors consistent with malformed pickle or yaml payloads"
+  ],
+  "remediation": "1. Never deserialize untrusted data using pickle, yaml.load, or similar unsafe methods. 2. Use safe alternatives: yaml.safe_load, json.loads, ast.literal_eval. 3. Never eval or exec strings from external sources. 4. Sandbox all code execution. 5. Audit all operations performed by the agent during the period it was active.",
+  "status": "active",
+  "kill_switch_active": true,
+  "researcher": "Bawbel Security Research Team",
+  "researcher_url": "https://bawbel.io",
+  "published": "2026-04-25T09:00:00Z",
+  "last_updated": "2026-04-25T09:00:00Z",
+  "references": [
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://github.com/bawbel/bawbel-ave/blob/main/SPEC.md"
+  ]
+}
