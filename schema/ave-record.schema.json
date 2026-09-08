@@ -615,6 +615,11 @@
             "pattern": "^[0-9a-f]{40}$",
             "description": "Full 40-character commit sha pinning the tree this mapping was read against, where the referenced framework has git history to pin. Same convention as crosswalk endpoint commit pinning: full, not abbreviated."
           },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The resolved tree URL at commit, where a reader can go check the mapping directly without reconstructing it from commit and repo. Optional even when commit is present. Matches the specCommit/specSource pairing independently designed by BerkantACUN/guardmcp (PR #3, 'Pin the OWASP spec commit the mapping was drafted against') for the same OWASP MCP Top 10 versioning gap OWASP/www-project-mcp-top-10#52 raised and this field exists to close -- guardmcp's PR pins the identical commit sha AVE's own owasp_mcp backfill used (165fe0f78ef104459237b4a8e0f6e78db9b02391), independent convergence on the same fix from two unrelated projects reading the same gap."
+          },
           "read_date": {
             "type": "string",
             "format": "date",
