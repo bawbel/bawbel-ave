@@ -74,3 +74,14 @@ OWASP/www-project-mcp-top-10#52, the live case (not a hypothetical) that
 prompted the field, where two independent projects assigned the same MCP
 category number to genuinely unrelated categories because each read the
 spec at a different point while it was still moving.
+`framework_sources.*.source_url` was added afterward, once an unrelated
+project facing the same #52 gap converged on the same shape:
+BerkantACUN/guardmcp PR #3 ("Pin the OWASP spec commit the mapping was
+drafted against") pins its SARIF taxonomy to the OWASP MCP Top 10 with a
+`specCommit`/`specSource` pair -- not a comment posted in #52 itself, a
+separate repo's independent fix for the versioning gap #52 describes --
+and its `specCommit` happens to be the exact same commit sha AVE's own
+`owasp_mcp` backfill pinned, `165fe0f78ef104459237b4a8e0f6e78db9b02391`.
+`source_url` mirrors `specSource`: the resolved tree URL at `commit`, so
+a reader can check the mapping without reconstructing it from repo and
+sha by hand. Optional even when `commit` is present.
